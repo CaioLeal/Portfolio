@@ -1,0 +1,849 @@
+:root {
+  /* Modo Escuro (Azul Profundo) */
+  --bg-color: #050B14;
+  --text-color: #e8edf2;
+  --pill-bg: rgba(20, 30, 45, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --accent: #00f0ff; 
+  --glass-color: #1a3fa0;
+}
+
+[data-theme="light"] {
+  /* Modo Claro (Transparente para o WebGL brilhar) */
+  --bg-color: transparent; 
+  --text-color: #0a0a12;
+  --pill-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --accent: #5b8cdb; 
+  --glass-color: #5b8cdb;
+}
+
+/* Remover os efeitos Neon da .navbar-border-anim e deixar Glass puro */
+.navbar-border-anim::before {
+  display: none; 
+}
+.navbar-border-anim {
+  padding: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.navbar-pill {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05); /* Quase 100% transparente */
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.2);
+  border-radius: 48px;
+  height: 70px;
+  padding: 0 32px 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Bolhas do HTML (Totalmente transparentes) */
+#tech-pool {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: visible;
+  /* Sem o 'filter: url(#goo);' aqui! */
+}
+
+.tech-bubble {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  background: transparent; /* O vidro virá do WebGL! */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  z-index: 10;
+}
+
+.tech-bubble img {
+  width: 55%;
+  height: 55%;
+  object-fit: contain;
+  pointer-events: none;
+  /* Cria uma sombra leve para a logo destacar dentro do vidro */
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); 
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Space Grotesk', sans-serif; /* Fonte nova mais Tech */
+  overflow-x: hidden;
+}
+
+/* --- Wrapper e Linha Neon Correndo --- */
+.navbar-wrapper {
+  position: fixed;
+  top: 24px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  padding: 0 20px;
+}
+
+/* 1. Ajustamos a largura aqui no Wrapper animado */
+.navbar-border-anim {
+  position: relative;
+  border-radius: 50px;
+  padding: 2px;
+  overflow: hidden;
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 1001;
+}
+
+/* 2. O truque da borda gigante giratória */
+.navbar-border-anim::before {
+  content: '';
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  /* Tamanho gigantesco para nunca "quebrar" nas pontas quando girar */
+  width: 3000px; 
+  height: 3000px;
+  /* Gradiente modificado para parecer um rastro de estrela cadente neon */
+  background: conic-gradient(from 0deg, transparent 60%, var(--neon-accent) 100%);
+  animation: border-spin 4s linear infinite;
+  z-index: -1;
+}
+
+@keyframes border-spin {
+  /* O translate mantém o centro do nosso quadrado gigante sempre no meio da navbar */
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 3. Retiramos a largura fixa que estava quebrando o layout */
+.navbar-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 70px;
+  padding: 0 32px 0 24px;
+  background: var(--pill-bg);
+  border-radius: 48px;
+  z-index: 1;
+}
+
+/* --- Logo --- */
+.logo-box {
+  background: #111;
+  padding: 8px 18px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.2rem; /* Fonte maior */
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 2px 0px 1px rgba(255, 0, 0, 0.7), -2px 0px 1px rgba(0, 255, 255, 0.7);
+}
+
+/* Adicione cursor na caixa da logo */
+.logo-box {
+  background: #111;
+  padding: 8px 18px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Ativa a animação no hover */
+.logo-box:hover .logo-text {
+  animation: glitch-anim 0.2s linear infinite;
+}
+
+/* Keyframes de Tremor e Inversão de Cores (Estilo Cyberpunk) */
+@keyframes glitch-anim {
+  0% { transform: translate(0); text-shadow: 2px 0px 1px rgba(255, 0, 0, 0.7), -2px 0px 1px rgba(0, 255, 255, 0.7); }
+  20% { transform: translate(-2px, 1px); text-shadow: -2px -1px 1px rgba(255, 0, 0, 0.7), 2px 1px 1px rgba(0, 255, 255, 0.7); }
+  40% { transform: translate(2px, -1px); text-shadow: 2px 1px 1px rgba(255, 0, 0, 0.7), -2px -1px 1px rgba(0, 255, 255, 0.7); }
+  60% { transform: translate(-1px, -2px); text-shadow: -2px 0px 1px rgba(255, 0, 0, 0.7), 2px 0px 1px rgba(0, 255, 255, 0.7); }
+  80% { transform: translate(1px, 2px); text-shadow: 2px -1px 1px rgba(255, 0, 0, 0.7), -2px 1px 1px rgba(0, 255, 255, 0.7); }
+  100% { transform: translate(0); text-shadow: 2px 0px 1px rgba(255, 0, 0, 0.7), -2px 0px 1px rgba(0, 255, 255, 0.7); }
+}
+
+/* --- Links --- */
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1rem; /* Fonte maior */
+  font-weight: 500;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  opacity: 1;
+  color: var(--neon-accent);
+  text-shadow: 0 0 10px var(--neon-glow);
+}
+
+/* --- Ações --- */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Espaçamento melhorado */
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* --- Switch de Tema (Estilo Codepen Adaptado) --- */
+.theme-switch {
+  width: 60px;
+  height: 32px;
+  border-radius: 30px;
+  background: #2a2a35;
+  border: 2px solid rgba(255,255,255,0.1);
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  transition: background 0.4s;
+}
+
+[data-theme="light"] .theme-switch {
+  background: #9cd6ef;
+  border-color: #65c0e7;
+}
+
+.switch-handle {
+  width: 24px;
+  height: 24px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  left: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Efeito elástico do seu Codepen */
+  overflow: hidden;
+}
+
+
+[data-theme="light"] .switch-handle {
+  transform: translateX(28px);
+}
+
+.icon {
+  position: absolute;
+  font-size: 14px;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.icon.moon { opacity: 1; transform: translateY(0); }
+.icon.sun { opacity: 0; transform: translateY(20px); }
+
+[data-theme="light"] .icon.moon { opacity: 0; transform: translateY(-20px); }
+[data-theme="light"] .icon.sun { opacity: 1; transform: translateY(0); }
+
+/* --- Botão Fale Comigo --- */
+.btn-neon {
+  text-decoration: none;
+  color: var(--bg-color);
+  background: var(--neon-accent);
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 0 15px var(--neon-glow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  white-space: nowrap; 
+  flex-shrink: 0;
+  align-self: center;
+  margin-top: -40px;
+}
+
+.btn-neon:hover {
+  box-shadow: 0 0 25px var(--neon-accent);
+  transform: scale(1.05);
+}
+
+/* --- Onda de Transição de Tema --- */
+.theme-wave {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999; /* Fica por cima de tudo na hora da transição */
+  pointer-events: none; /* Para não bloquear cliques */
+  display: none;
+}
+
+/* --- Menu Hamburger --- */
+.hamburger {
+  display: none; /* Escondido no Desktop */
+  background: transparent;
+  border: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  padding: 8px;
+  margin-left: 10px;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--text-color);
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* --- Menu Mobile Overlay (Estilo Apple Glass) --- */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(7, 7, 9, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 130px; 
+  gap: 20px;
+  z-index: 990;
+  opacity: 0;
+  visibility: hidden;
+  opacity: 0;
+  visibility: hidden; 
+}
+
+[data-theme="light"] .mobile-menu {
+  background: rgba(240, 240, 245, 0.95);
+}
+
+.mobile-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.mobile-nav-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1.5rem; /* Fonte grande e elegante no mobile */
+  font-weight: 700;
+  opacity: 0; /* GSAP vai animar isso */
+  transform: translateY(30px); /* GSAP vai animar isso */
+  transition: color 0.3s ease;
+}
+
+.mobile-nav-links a:hover, .mobile-nav-links a.active {
+  color: var(--neon-accent);
+  text-shadow: 0 0 15px var(--neon-glow);
+}
+
+.mobile-btn {
+  font-size: 1.2rem;
+  padding: 16px 36px;
+  margin: 0; /* Reseta o margin negativo aqui! */
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Animação do Hamburger virando "X" */
+.hamburger {
+  z-index: 1000; /* Sempre clicável por cima do menu */
+  position: relative;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 8% 40px; /* Espaço para a navbar não cobrir */
+  position: relative;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  gap: 40px;
+}
+
+.hero-text-area {
+  flex: 1;
+  max-width: 600px;
+}
+
+.greeting {
+  color: var(--neon-accent);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+/* O container do nome onde o Three.js vai renderizar */
+#name-shader-container {
+  width: 100%;
+  height: 140px; /* Altura fixa para caber o nome "Caio Leal" */
+  position: relative;
+  margin-bottom: 10px;
+  overflow: visible;
+}
+
+#name-shader-container canvas {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100% !important;
+  height: 100% !important;
+  outline: none;
+}
+
+.role {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 24px;
+}
+
+.role span {
+  color: var(--neon-accent);
+}
+
+.bio {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #a0a0a0;
+  margin-bottom: 40px;
+}
+
+/* --- Botões e Social --- */
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  opacity: 0; /* Começa invisível para o GSAP animar */
+}
+
+/* O btn-neon nós já temos, vamos só garantir que ele não tenha margin-top aqui */
+.hero-buttons .btn-neon {
+  margin-top: 10;
+  margin-left: 0;
+}
+
+.btn-outline {
+  padding: 12px 28px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.btn-outline:hover {
+  border-color: var(--neon-accent);
+  background: rgba(0, 240, 255, 0.05);
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  color: var(--text-color);
+  opacity: 0.7;
+  transition: opacity 0.3s, color 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.social-links a svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social-links a:hover {
+  opacity: 1;
+  color: var(--neon-accent);
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Lado Direito (Avatar) --- */
+.hero-image-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* --- Avatar Card (Efeito Carta Colecionável com Neon) --- */
+.hero-image-area {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.avatar-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 360px; /* Largura ideal para a carta */
+  opacity: 0; /* Começa invisível, o JS vai revelar */
+  /* O tombo pra direita (rotation: 6) vai ser aplicado via GSAP no JS! */
+}
+
+/* O corpo da Carta */
+.avatar-card {
+  position: relative;
+  border-radius: 24px;
+  padding: 3px; /* Espessura da linha neon da carta */
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); /* Sombra pesada de carta flutuando */
+}
+
+/* O neon correndo em volta da carta */
+.avatar-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent 70%, var(--neon-accent) 100%);
+  animation: border-spin 3s linear infinite;
+  z-index: 0;
+}
+
+/* Fundo do Card (para a linha ficar só nas bordas) */
+.avatar-card-inner {
+  position: relative;
+  z-index: 1;
+  background-color: var(--pill-bg); /* Usa a mesma cor escura/clara do navbar */
+  border-radius: 22px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px; /* Um pequeno respiro pra imagem não colar nas bordas */
+}
+
+.avatar-img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  z-index: 2;
+}
+
+/* Brilho neon atrás de toda a carta */
+.avatar-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  background: var(--neon-accent);
+  filter: blur(80px);
+  opacity: 0.4;
+  z-index: -1; 
+}
+
+/* --- Cursor de Digitação --- */
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background-color: var(--neon-accent);
+  margin-left: 2px;
+  animation: blink 0.8s infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ==========================================
+   ABOUT SECTION (Inspirado no Prashant)
+========================================== */
+.about-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1; /* Acima das estrelas */
+}
+
+/* --- About Hero --- */
+.about-hero {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 8em 2em 6em 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.about-hero-header {
+  text-align: center;
+  z-index: 2;
+}
+
+.about-hero-header h1 {
+  font-size: clamp(4rem, 8vw, 7.5rem);
+  line-height: 1.1;
+}
+
+.about-hero-header h1.highlight {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--neon-accent);
+  text-shadow: 0 0 15px var(--neon-glow);
+}
+
+.about-hero-bio {
+  text-align: center;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  z-index: 2;
+  background: var(--pill-bg);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.about-hero-bio .ss {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #c0c0c0;
+}
+
+.about-hero-bio .mn {
+  color: var(--neon-accent);
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* O Retrato (Estilo Carta) */
+.about-hero-portrait {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(10deg);
+  width: 18%;
+  min-width: 200px;
+  aspect-ratio: 5/7;
+  border-radius: 1em;
+  overflow: hidden;
+  border: 2px solid var(--neon-accent);
+  box-shadow: 0 0 30px var(--neon-glow);
+  z-index: 1;
+}
+
+.about-hero-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #111;
+}
+
+/* --- About Copy & Tags --- */
+.about-copy {
+  position: relative;
+  width: 100vw;
+  padding: 8em 2em;
+}
+
+.about-copy-content {
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--pill-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--neon-accent);
+  box-shadow: 0 0 20px var(--neon-glow);
+  border-radius: 1em;
+  padding: 3em 2em;
+  z-index: 2;
+  position: relative;
+}
+
+.about-copy-content h3 {
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+.about-copy-content h3 span {
+  font-weight: 900;
+  color: var(--neon-accent);
+}
+
+.about-copy .tag {
+  position: absolute;
+  width: max-content;
+  background-color: #ffffff;
+  border-radius: 30px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  z-index: 1;
+}
+
+.about-copy .tag p {
+  text-transform: uppercase;
+  color: #000000;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 10px 20px;
+  margin: 0;
+}
+
+.about-copy #tag-1 { top: 30%; left: 20%; transform: translate(-50%, -50%) rotate(20deg); }
+.about-copy #tag-2 { top: 65%; left: 15%; transform: translate(-50%, -50%) rotate(-15deg); }
+.about-copy #tag-3 { top: 40%; left: 80%; transform: translate(-50%, -50%) rotate(10deg); }
+.about-copy #tag-4 { top: 80%; left: 85%; transform: translate(-50%, -50%) rotate(-25deg); }
+.about-copy #tag-5 { top: 90%; left: 50%; transform: translate(-50%, -50%) rotate(5deg); }
+
+/* --- Stats --- */
+.stats {
+  padding: 8em 8%;
+}
+
+.stats-row {
+  display: flex;
+  gap: 2em;
+}
+
+.stats-item-1, .stats-item-2, .stats-item-3 {
+  background-color: var(--pill-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2em;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.3s, border-color 0.3s;
+  flex: 1;
+  min-width: 250px;
+}
+
+.stats-item-1:hover, .stats-item-2:hover, .stats-item-3:hover {
+  transform: translateY(-10px);
+  border-color: var(--neon-accent);
+  box-shadow: 0 10px 25px var(--neon-glow);
+}
+
+/* Responsividade About */
+@media (max-width: 1000px) {
+  .about-hero-bio, .about-copy-content { width: 90%; }
+  .about-hero-portrait { width: 40%; top: 50%; }
+  .about-copy .tag { display: none; } /* Esconde as tags no mobile pra não poluir */
+  .stats-row { flex-direction: column; }
+}
+
+/* Responsividade Hero */
+@media (max-width: 992px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  #name-shader-container {
+    height: 100px; /* Menor no mobile */
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+}
+
+/* --- Responsividade Atualizada --- */
+@media (max-width: 1024px) {
+  .nav-links { 
+    display: none; 
+  }
+  /* Esconde o botão neon da navbar principal no mobile */
+  .nav-actions .btn-neon {
+    display: none;
+  }
+  .hamburger { 
+    display: flex; 
+  }
+}
