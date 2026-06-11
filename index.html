@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,12 +8,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/css/style.css" />
-    <link rel="stylesheet" href="/src/css/stars.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  </head>
   </head>
   <body>
-    <div id="liquid-bg"></div>
     
-    <div id="star-container"></div> 
+    <canvas id="ocean" style="position: fixed; inset: 0; z-index: 0; pointer-events: none;"></canvas>
 
     <header class="navbar-wrapper">
       <div class="navbar-border-anim">
@@ -26,21 +28,20 @@
           <ul class="nav-links">
             <li><a href="#inicio" class="active">Início</a></li>
             <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#designs">Designs</a></li>
+            <li><a href="#formacoes">Formações</a></li>
+            <li><a href="#duvidas">Duvidas</a></li>
             <li><a href="#servicos">Serviços</a></li>
             <li><a href="#contato">Contato</a></li>
           </ul>
 
           <div class="nav-actions">
-            <button id="lang-toggle" class="lang-btn">PT</button>
-            
-            <button id="theme-toggle" class="theme-switch" aria-label="Mudar tema">
-              <div class="switch-handle">
-                <span class="icon sun">☀️</span>
-                <span class="icon moon">🌙</span>
+            <div class="time-widget">
+              <div class="time-info">
+                <span id="ocean-mood">DIA</span>
+                <span id="ocean-time">12:00</span>
               </div>
-            </button>
+              <button id="theme-toggle" class="icon-btn" aria-label="Forçar Noite">☀️</button>
+            </div>
             
             <a href="#fale-comigo" class="btn-neon">Fale Comigo</a>
             
@@ -49,18 +50,7 @@
             </button>
           </div>
         </nav>
-      </div> <div class="mobile-menu">
-        <ul class="mobile-nav-links">
-          <li><a href="#inicio" class="active">Início</a></li>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#projetos">Projetos</a></li>
-          <li><a href="#designs">Designs</a></li>
-          <li><a href="#servicos">Serviços</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
-        <a href="#fale-comigo" class="btn-neon mobile-btn">Fale Comigo</a>
       </div>
-      
     </header>
 
     <div id="theme-wave" class="theme-wave"></div>
@@ -68,20 +58,17 @@
     <!-- #################### HERO SECTION #################### -->
     <main class="hero-section" id="inicio">
       <div class="hero-content">
-        
         <div class="hero-text-area">
           <p class="greeting typing-target" data-text="OLÁ, EU SOU"></p>
           
           <div id="name-shader-container" aria-label="Caio Leal"></div>
           
           <h2 class="role typing-target" data-text="Desenvolvedor Full Stack & Web"></h2>
-          
           <p class="bio typing-target" data-text="Com 3 anos de experiência, crio soluções web completas com foco na experiência do usuário. Especialista na concepção de interfaces responsivas e implementação de funcionalidades dinâmicas para resolver problemas reais."></p>
 
           <div class="hero-buttons">
             <a href="#projetos" class="btn-neon">Ver projetos</a>
             <a href="#contato" class="btn-outline">Entre em contato</a>
-            
             <div class="social-links">
               <a href="https://github.com/CaioLeal" target="_blank" aria-label="GitHub">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
@@ -95,16 +82,10 @@
 
         <div class="hero-image-area">
           <div class="avatar-card-wrapper">
-            <div class="avatar-glow"></div>
             
-            <div class="avatar-card">
-              <div class="avatar-card-inner">
-                <img src="img/heroimg.png" alt="Avatar Caio" class="avatar-img" />
+            <img src="/img/heroimg.png" alt="Avatar Caio" class="avatar-img" />
               </div>
-            </div>
-          </div>
         </div>
-
       </div>
     </main>
     <!-- #################### ABOUT SECTION #################### -->
@@ -122,7 +103,7 @@
           <p class="mn">Front-end / Back-end / Design / Repetir</p>
         </div>
         <div class="about-hero-portrait">
-          <img src="/img/heroimg.png" alt="Caio Leal Portrait" />
+          <img src="/img/heroimg2.png" alt="Caio Leal Portrait" />
         </div>
       </div>
 
@@ -160,6 +141,342 @@
       </div>
 
     </section>
+
+    <!-- #################### CERTIFICATES #################### -->
+     <section id="formacoes" class="education-container">
+      <div class="section-header">
+        <h2 class="section-title">Minhas Formações</h2>
+        <p class="section-subtitle">Aprendizado contínuo e aprimoramento técnico.</p>
+      </div>
+
+      <div class="edu-grid">
+        
+        <div class="edu-card">
+          <div class="edu-card-inner">
+            <div class="edu-header">
+              <div class="edu-logo">
+                <img src="/img/uninove.png" alt="Uninove" onerror="this.style.display='none'; this.parentNode.innerHTML='UNI'">
+              </div>
+              <span class="edu-status status-progress">Em Andamento</span>
+            </div>
+            <h3 class="edu-course">Análise e Desenvolvimento de Sistemas</h3>
+            <p class="edu-school">Uninove</p>
+            <p class="edu-date">Julho/2025 — Atualmente</p>
+            <div class="edu-progress-container">
+              <div class="edu-progress-info">
+                <span>Progresso Geral</span>
+                <span class="progress-percent" data-target="40">0%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" data-width="40%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-card-inner">
+            <div class="edu-header">
+              <div class="edu-logo">
+                <img src="/img/fiap.png" alt="FIAP" onerror="this.style.display='none'; this.parentNode.innerHTML='FP'">
+              </div>
+              <span class="edu-status status-progress">Quase lá</span>
+            </div>
+            <h3 class="edu-course">Python Development</h3>
+            <p class="edu-school">FIAP</p>
+            <p class="edu-date">Previsto: Julho/2026</p>
+            <div class="edu-progress-container">
+              <div class="edu-progress-info">
+                <span>Progresso do Curso</span>
+                <span class="progress-percent" data-target="90">0%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" data-width="90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-card">
+          <div class="edu-card-inner">
+            <div class="edu-header">
+              <div class="edu-logo">
+                <img src="/img/fiap.png" alt="FIAP" onerror="this.style.display='none'; this.parentNode.innerHTML='FJ'">
+              </div>
+              <span class="edu-status status-progress">Quase lá</span>
+            </div>
+            <h3 class="edu-course">Java Development</h3>
+            <p class="edu-school">FIAP</p>
+            <p class="edu-date">Previsto: Julho/2026</p>
+            <div class="edu-progress-container">
+              <div class="edu-progress-info">
+                <span>Progresso do Curso</span>
+                <span class="progress-percent" data-target="90">0%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" data-width="90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-card is-completed">
+          <div class="edu-card-inner">
+            <div class="edu-header">
+              <div class="edu-logo">
+                <img src="/img/udemy.png" alt="Udemy" onerror="this.style.display='none'; this.parentNode.innerHTML='UD'">
+              </div>
+              <span class="edu-status status-completed">Concluído</span>
+            </div>
+            <h3 class="edu-course">Desenvolvimento Full Stack (JS e PHP)</h3>
+            <p class="edu-school">Udemy</p>
+            <p class="edu-date">Concluído em Junho/2025</p>
+            <div class="edu-progress-container">
+              <div class="edu-progress-info">
+                <span>Progresso do Curso</span>
+                <span class="progress-percent" data-target="100">0%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" data-width="100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="edu-card is-completed">
+          <div class="edu-card-inner">
+            <div class="edu-header">
+              <div class="edu-logo">
+                <img src="/img/ada.png" alt="Ada Tech" onerror="this.style.display='none'; this.parentNode.innerHTML='ADA'">
+              </div>
+              <span class="edu-status status-completed">Concluído</span>
+            </div>
+            <h3 class="edu-course">Ada Santander Coders</h3>
+            <p class="edu-school">ADA TECH</p>
+            <p class="edu-date">Concluído em Janeiro/2025</p>
+            <div class="edu-progress-container">
+              <div class="edu-progress-info">
+                <span>Progresso do Curso</span>
+                <span class="progress-percent" data-target="100">0%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" data-width="100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- #################### SERVICES #################### -->
+    <section id="duvidas" class="services-container">
+      <div class="section-header">
+        <h2 class="section-title">Como posso contribuir?</h2>
+        <p class="section-subtitle">Minhas principais áreas de atuação.</p>
+      </div>
+
+      <div class="services">
+        <div class="service-card" id="service-card-1">
+          <div class="service-card-inner">
+            <div class="service-card-content">
+              <h1>Frontend Development</h1>
+              <p>Criação de interfaces imersivas, responsivas e de alta performance utilizando HTML, CSS, JavaScript, React e animações fluidas com GSAP.</p>
+            </div>
+            <div class="service-card-img">
+              <div class="service-icon-placeholder">🎨</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-card" id="service-card-2">
+          <div class="service-card-inner">
+            <div class="service-card-content">
+              <h1>Backend Development</h1>
+              <p>Desenvolvimento de APIs seguras e escaláveis, arquitetura de banco de dados e lógica de servidores utilizando Python, Java e PHP.</p>
+            </div>
+            <div class="service-card-img">
+              <div class="service-icon-placeholder">⚙️</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-card" id="service-card-3">
+          <div class="service-card-inner">
+            <div class="service-card-content">
+              <h1>UI/UX Design</h1>
+              <p>Prototipação de interfaces focadas na experiência do usuário, aliando estética e usabilidade para reter a atenção do cliente final.</p>
+            </div>
+            <div class="service-card-img">
+              <div class="service-icon-placeholder">✨</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-card" id="service-card-4">
+          <div class="service-card-inner">
+            <div class="service-card-content">
+              <h1>Web Applications</h1>
+              <p>Soluções Full Stack de ponta a ponta. Da concepção do banco de dados até o deploy na nuvem da sua aplicação web completa.</p>
+            </div>
+            <div class="service-card-img">
+              <div class="service-icon-placeholder">🚀</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+        <!-- #################### CONTACT #################### -->
+    <section id="contato" class="contact-cta">
+      <a href="mailto:seu-email@exemplo.com" class="contact-button-glass">
+        <div class="contact-text-small">
+          <p>Vamos construir algo incrível juntos.</p>
+        </div>
+        <div class="contact-text-large">
+          <h1>Entre em contato</h1>
+        </div>
+      </a>
+    </section>
+
+    <!-- #################### CCARROUSEL #################### -->
+    <section id="projetos" class="projects-container">
+      <div class="section-header">
+        <h2 class="section-title">Projetos Recentes</h2>
+        <p class="section-subtitle">Um pouco do meu portfólio e trabalhos anteriores.</p>
+      </div>
+
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev-btn" aria-label="Anterior">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div class="projects-carousel" id="projects-track">
+          
+          <a class="project-card-glass" href="#">
+            <div class="project-img-wrapper">
+              <img src="/img/capa_apolo.png" alt="Apolo Veículos" onerror="this.src='https://placehold.co/600x400/1a3fa0/ffffff?text=Apolo+Veiculos'">
+            </div>
+            <div class="project-content">
+              <span class="project-category">Sistema web</span>
+              <h3>Apolo Veículos</h3>
+              <p>Gerenciamento de negociações de automóveis, estoque e acompanhamento de vendas.</p>
+              <div class="project-tags">
+                <span>PHP</span>
+                <span>MySQL</span>
+                <span>JavaScript</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card-glass" href="#">
+            <div class="project-img-wrapper">
+              <img src="/img/capa_funko.png" alt="Funko Log" onerror="this.src='https://placehold.co/600x400/5b8cdb/ffffff?text=Funko+Log'">
+            </div>
+            <div class="project-content">
+              <span class="project-category">E-commerce</span>
+              <h3>Funko Log</h3>
+              <p>Catálogo e CRUD para organização de produtos Funko POP com painel administrativo.</p>
+              <div class="project-tags">
+                <span>PHP</span>
+                <span>MySQL</span>
+                <span>Bootstrap</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card-glass" href="#">
+            <div class="project-img-wrapper">
+              <img src="/img/capa_patrono.png" alt="Patrono Neves" onerror="this.src='https://placehold.co/600x400/2d6fd4/ffffff?text=Patrono+Neves'">
+            </div>
+            <div class="project-content">
+              <span class="project-category">Educação</span>
+              <h3>Patrono Neves</h3>
+              <p>Plataforma de cursos online com gerenciamento de conteúdo, usuários e progresso.</p>
+              <div class="project-tags">
+                <span>PHP</span>
+                <span>MySQL</span>
+                <span>JavaScript</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="project-card-glass" href="#">
+            <div class="project-img-wrapper">
+              <img src="/img/capa_album.png" alt="Álbum do Amor" onerror="this.src='https://placehold.co/600x400/ff7e54/ffffff?text=Album+do+Amor'">
+            </div>
+            <div class="project-content">
+              <span class="project-category">Interativo</span>
+              <h3>Álbum do Amor</h3>
+              <p>Experiência digital interativa com sistema de pacotinhos de figurinhas e animações WebGL.</p>
+              <div class="project-tags">
+                <span>React</span>
+                <span>GSAP</span>
+                <span>Firebase</span>
+              </div>
+            </div>
+          </a>
+
+          </div>
+
+        <button class="carousel-btn next-btn" aria-label="Próximo">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- #################### FOOTER #################### -->
+    <footer class="site-footer">
+      <div class="newsletter">
+
+      </div>
+
+      <div class="footer-bottom">
+        <a href="#" class="magic-badge" title="Meu Projeto">
+          <img src="/img/caio-buttom-transparent.png" alt="Meu Botão">
+          <i class="fa-solid fa-gamepad particle p1"></i>
+          <i class="fa-solid fa-code particle p2"></i>
+          <i class="fa-solid fa-headset particle p3"></i>
+          <i class="fa-solid fa-robot particle p4"></i>
+          <i class="fa-solid fa-laptop-code particle p5"></i>
+        </a>
+
+        <div class="footer-links">
+          <a href="#inicio">Home</a>
+          <a href="#sobre">Sobre nós</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#projetos">Projetos</a>
+          <a href="#contato">Contato</a>
+        </div>
+        
+        <a href="https://cosmusagency.vercel.app/" target="_blank" class="magic-badge" title="Criado por Cosmos Agency">
+          <img src="/img/Cosmus-Buttom-Transparent.gif" alt="Cosmos Agency">
+          <i class="fa-solid fa-earth-americas particle p1"></i>
+          <i class="fa-solid fa-rocket particle p2"></i>
+          <i class="fa-solid fa-star particle p3"></i>
+          <i class="fa-solid fa-meteor particle p4"></i>
+          <i class="fa-solid fa-satellite particle p5"></i>
+        </a>
+      </div>
+
+      <div class="footer-credits">
+        <div class="copyright">
+          Copyright &copy; 2020 - <span id="current-year">2026</span> 
+          <a href="#">Caio Leal</a>
+        </div>
+        
+        <div class="social-icons">
+          <a href="https://github.com/CaioLeal" aria-label="Github">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/caiolealsilva/" aria-label="Linkedin">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="#" aria-label="X (Twitter)">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          </div>
+    </footer>
 
     <script type="module" src="/src/js/main.js"></script>
   </body>

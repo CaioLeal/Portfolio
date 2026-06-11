@@ -2,7 +2,6 @@ import * as THREE from 'three';
 
 let mat, bgCtx, bgCanvas, bgTexture, renderer;
 
-// Função para atualizar as cores se o tema mudar
 export function updateLiquidTheme() {
   if(!mat) return;
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -44,14 +43,6 @@ function drawBackground() {
   }
   bgCtx.restore();
 
-  bgCtx.fillStyle = isDark ? "rgba(255, 255, 255, 0.03)" : "#ffffff";
-  bgCtx.textAlign = "center";
-  bgCtx.textBaseline = "middle";
-  const titleSize = Math.round(w * 0.13);
-  bgCtx.font = `800 ${titleSize}px 'Space Grotesk', sans-serif`;
-  bgCtx.fillText("Liquid", w * 0.5, h * 0.38);
-  bgCtx.fillText("Glass", w * 0.5, h * 0.38 + titleSize * 1.05);
-
   bgTexture.needsUpdate = true;
 }
 
@@ -59,9 +50,11 @@ export function initLiquid() {
   const bgContainer = document.getElementById("liquid-bg");
   if (!bgContainer) return;
 
-  const MAX_DROPLETS = 40;
+  const MAX_DROPLETS = 60; 
   renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
-  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  // CORREÇÃO MESTRE: Pega a densidade de pixels da sua tela
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  renderer.setPixelRatio(dpr);
   renderer.setSize(window.innerWidth, window.innerHeight);
   bgContainer.appendChild(renderer.domElement);
 
@@ -74,8 +67,6 @@ export function initLiquid() {
   bgTexture.minFilter = THREE.LinearFilter;
   bgTexture.magFilter = THREE.LinearFilter;
   
-  bgCanvas.width = window.innerWidth;
-  bgCanvas.height = window.innerHeight;
   drawBackground();
 
   const MAX_ENTRIES = MAX_DROPLETS * 2;
@@ -86,8 +77,8 @@ export function initLiquid() {
   
   let drops = [];
   function spawn(x, y, r) {
-    if (drops.length >= 15) return; // Limita gotas soltas para não poluir
-    drops.push({ x, y, r, vx: (Math.random()-0.5)*0.002, vy: (Math.random()-0.5)*0.002, softOffX: 0, softOffY: 0 });
+    if (drops.length >= 10) return;
+    drops.push({ x, y, r, vx: (Math.random()-0.5)*0.002, vy: (Math.random()-0.5)*0.002 });
   }
 
   for (let i = 0; i < 8; i++) spawn((Math.random()-0.5)*0.7, (Math.random()-0.5)*0.5, 0.04);
@@ -129,12 +120,16 @@ export function initLiquid() {
       
       vec3 glassColor = bgCA * mix(vec3(1.0), vec3(0.93, 0.96, 1.0), smoothstep(thr, thr + 3.0, field) * 0.45) * (0.92 + 0.08 * diff) 
                       + vec3(1.0) * spec * 0.85 + vec3(0.9, 0.95, 1.0) * smoothstep(thr + 0.6, thr, field) * edge * 0.22 + vec3(1.0) * fresnel * 0.10;
+                      
+      if (uIsDark > 0.5) {
+        glassColor += vec3(0.1, 0.5, 1.0) * smoothstep(thr + 0.6, thr, field) * edge * 0.6; 
+        glassColor += vec3(1.0) * spec * 1.5; 
+      }
       
       vec3 bg = texture2D(uBg, uv).rgb * (1.0 - smoothstep(thr - 0.35, thr - 0.05, field) * 0.06);
       vec3 col = mix(bg, glassColor, edge) + vec3(1.0) * (smoothstep(thr - 0.10, thr - 0.01, field) * (1.0 - smoothstep(thr, thr + 0.06, field)) * 0.28);
       
-      // MÁGICA DO TEMA: No escuro, o fundo vazio é transparente para as estrelas aparecerem!
-      float alpha = mix(1.0, max(0.0, edge * 1.5), uIsDark);
+      float alpha = mix(1.0, max(0.0, edge * 2.0), uIsDark);
       gl_FragColor = vec4(col, alpha);
     }
   `;
@@ -142,7 +137,8 @@ export function initLiquid() {
   mat = new THREE.ShaderMaterial({
     vertexShader: vertSrc, fragmentShader: fragSrc, transparent: true,
     uniforms: {
-      uRes: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+      // CORREÇÃO: Passando o tamanho real em Pixels Físicos para a placa de vídeo
+      uRes: { value: new THREE.Vector2(window.innerWidth * dpr, window.innerHeight * dpr) },
       uData: { value: dropletTex }, uBg: { value: bgTexture }, 
       uCount: { value: MAX_ENTRIES },
       uIsDark: { value: document.documentElement.getAttribute('data-theme') === 'dark' ? 1.0 : 0.0 }
@@ -162,7 +158,8 @@ export function initLiquid() {
   window.addEventListener("resize", () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     aspect = window.innerWidth / window.innerHeight;
-    mat.uniforms.uRes.value.set(window.innerWidth, window.innerHeight);
+    const currentDpr = renderer.getPixelRatio();
+    mat.uniforms.uRes.value.set(window.innerWidth * currentDpr, window.innerHeight * currentDpr);
     drawBackground();
   });
 
@@ -170,22 +167,50 @@ export function initLiquid() {
     dropletBuf.fill(0);
     let index = 0;
     
-    // Gotas do Mouse
+    // Calcula o quanto a tela já rolou para baixo
+    const scrollOffset = window.scrollY / window.innerHeight;
+    
+    // 1. Gotas do Fundo (Apenas na Hero Section)
     for (const d of drops) {
       d.x += d.vx; d.y += d.vy; d.vx *= 0.99; d.vy *= 0.99;
       if (mouse.active) {
-        const dx = d.x - mouse.x; const dy = d.y - mouse.y; const dSq = dx*dx + dy*dy;
+        const dx = d.x - mouse.x; const dy = (d.y - scrollOffset) - mouse.y; const dSq = dx*dx + dy*dy;
         if (dSq < 0.05 && dSq > 1e-5) { const dist = Math.sqrt(dSq); d.vx += (dx/dist)*0.002; d.vy += (dy/dist)*0.002; }
       }
       if (d.x < -aspect/2 || d.x > aspect/2) d.vx *= -1;
       if (d.y < -0.5 || d.y > 0.5) d.vy *= -1;
 
-      dropletBuf[index*4] = d.x; dropletBuf[index*4+1] = d.y; dropletBuf[index*4+2] = d.r;
-      dropletBuf[(MAX_DROPLETS+index)*4] = d.x; dropletBuf[(MAX_DROPLETS+index)*4+1] = d.y; dropletBuf[(MAX_DROPLETS+index)*4+2] = d.r * 0.6;
+      // Elas somem subindo enquanto você desce a página!
+      const screenY = d.y + scrollOffset;
+
+      dropletBuf[index*4] = d.x; dropletBuf[index*4+1] = screenY; dropletBuf[index*4+2] = d.r; dropletBuf[index*4+3] = 1;
+      dropletBuf[(MAX_DROPLETS+index)*4] = d.x; dropletBuf[(MAX_DROPLETS+index)*4+1] = screenY; dropletBuf[(MAX_DROPLETS+index)*4+2] = d.r * 0.6; dropletBuf[(MAX_DROPLETS+index)*4+3] = 1;
       index++;
     }
 
-    // INJEÇÃO DAS LOGOS DO HTML NO 3D!
+    // 2. Transforma a Navbar em uma gota esticada
+    const navPill = document.querySelector('.navbar-pill');
+    if (navPill) {
+      const rect = navPill.getBoundingClientRect();
+      const rPixels = rect.height / 2.2; 
+      const shaderR = rPixels / window.innerHeight;
+      const numDrops = Math.floor(rect.width / (rPixels * 1.5)); 
+      const startX = rect.left + rPixels;
+      const endX = rect.right - rPixels;
+      
+      for(let j=0; j<=numDrops; j++) {
+         if (index >= MAX_DROPLETS) break;
+         const dropX = startX + (endX - startX) * (j / numDrops);
+         const shaderX = (dropX / window.innerWidth - 0.5) * aspect;
+         const shaderY = 0.5 - ((rect.top + rect.height / 2) / window.innerHeight);
+
+         dropletBuf[index*4] = shaderX; dropletBuf[index*4+1] = shaderY; dropletBuf[index*4+2] = shaderR * 1.5; dropletBuf[index*4+3] = 1;
+         dropletBuf[(MAX_DROPLETS+index)*4] = shaderX; dropletBuf[(MAX_DROPLETS+index)*4+1] = shaderY; dropletBuf[(MAX_DROPLETS+index)*4+2] = 0; dropletBuf[(MAX_DROPLETS+index)*4+3] = 1;
+         index++;
+      }
+    }
+
+    // 3. Lê o HTML para envelopar cada Tecnologia em vidro
     const techBubbles = document.querySelectorAll('.tech-bubble');
     techBubbles.forEach(b => {
       if (index >= MAX_DROPLETS) return;
@@ -195,11 +220,12 @@ export function initLiquid() {
       
       const shaderX = (cx / window.innerWidth - 0.5) * aspect;
       const shaderY = 0.5 - (cy / window.innerHeight);
-      const shaderR = (rect.width / 2.2) / window.innerHeight;
+      
+      // Dinâmico: Lê a largura do CSS (70px) para desenhar o 3D no tamanho idêntico!
+      const shaderR = (rect.width / 2.1) / window.innerHeight;
 
-      dropletBuf[index*4] = shaderX; dropletBuf[index*4+1] = shaderY; dropletBuf[index*4+2] = shaderR;
-      // Sem rastro fantasma para as logos ficarem nítidas
-      dropletBuf[(MAX_DROPLETS+index)*4+2] = 0; 
+      dropletBuf[index*4] = shaderX; dropletBuf[index*4+1] = shaderY; dropletBuf[index*4+2] = shaderR; dropletBuf[index*4+3] = 1;
+      dropletBuf[(MAX_DROPLETS+index)*4] = shaderX; dropletBuf[(MAX_DROPLETS+index)*4+1] = shaderY; dropletBuf[(MAX_DROPLETS+index)*4+2] = 0; dropletBuf[(MAX_DROPLETS+index)*4+3] = 1;
       index++;
     });
 

@@ -24,7 +24,7 @@ export function initTechBubbles() {
       y: 50 + Math.random() * (container.clientHeight - 100),
       vx: (Math.random() - 0.5) * 3,
       vy: (Math.random() - 0.5) * 3,
-      radius: 40 // Metade do tamanho da bolha
+      radius: 50 // Metade do tamanho da bolha
     });
   });
 

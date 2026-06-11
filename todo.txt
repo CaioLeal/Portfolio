@@ -1,0 +1,6 @@
+Piscar aleatoriamente
+Falar textos
+Reagir a cliques
+Fazer expressões conforme ações do usuário
+Responder a comandos de voz
+Integrar com IA
