@@ -13,6 +13,24 @@
   --glass-color: #6fa8d4;
 }
 
+.scroller::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+.scroller::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
 [data-theme="dark"] {
   /* Tema Escuro */
   --text-color: #ffffff;
