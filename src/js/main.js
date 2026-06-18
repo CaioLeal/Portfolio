@@ -358,3 +358,120 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// ==========================================
+// 11. JANELA DA AGÊNCIA (ESTRELAS E EXPLOSÃO)
+// ==========================================
+window.addEventListener("DOMContentLoaded", () => {
+  const agencyWindow = document.getElementById('agency-window');
+  const starContainer = document.getElementById('agency-star-container');
+
+  if (agencyWindow && starContainer) {
+    // 1. Criar estrelas de fundo que ficam piscando (Ambient Twinkle)
+    const count = 40;
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement('div');
+      s.className = 'agency-star';
+      
+      const size = Math.random() * 2 + 1;
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.setProperty('--duration', (2 + Math.random() * 3) + 's');
+      s.style.animationDelay = (Math.random() * 3) + 's';
+      
+      starContainer.appendChild(s);
+    }
+
+    // 2. Explosão de Estrelas ao passar o mouse (Motor Físico da Cosmus)
+    let isAnimating = false;
+    
+    class StarParticle {
+        constructor(x, y) {
+            this.element = document.createElement("i");
+            this.element.className = "fa-solid fa-star";
+            
+            // Puxa as cores ideais combinando com o seu tema de vidro
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const colors = isDark ? ["#ffffff", "#a259ff", "#32cfc9"] : ["#070709", "#ff7e54", "#6fa8d4"];
+            this.element.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            this.element.style.position = "absolute";
+            this.element.style.fontSize = `${Math.random() * 3 + 6}px`; 
+            this.element.style.left = `0px`;
+            this.element.style.top = `0px`;
+            this.element.style.zIndex = `0`;
+
+            starContainer.appendChild(this.element);
+
+            this.x = x;
+            this.y = y;
+            this.vx = (Math.random() - 0.5) * 60; // Força horizontal da explosão
+            this.vy = -10 * Math.random(); // Força para cima
+            this.rotation = Math.random() * 360;
+            this.rotationSpeed = (Math.random() - 0.5) * 15;
+            this.opacity = 1;
+        }
+
+        update() {
+            this.vy += 0.2; // Gravidade puxando pra baixo
+            this.vx *= 0.96; // Atrito freando pros lados
+            this.vy *= 0.96;
+            this.rotationSpeed *= 0.96;
+            
+            this.x += this.vx;
+            this.y += this.vy;
+            this.rotation += this.rotationSpeed;
+            this.opacity -= 0.01; // Vai sumindo aos poucos
+
+            this.element.style.transform = `translate(${this.x}px, ${this.y}px) rotate(${this.rotation}deg)`;
+            this.element.style.opacity = this.opacity;
+
+            return this.opacity > 0;
+        }
+    }
+
+    // Dispara a explosão quando o mouse ENTRA na janela
+    agencyWindow.addEventListener("mouseenter", (e) => {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        const rect = agencyWindow.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        let particles = [];
+        for (let i = 0; i < 25; i++) {
+            particles.push(new StarParticle(mouseX, mouseY));
+        }
+
+        const animate = () => {
+            particles = particles.filter(particle => {
+                const isAlive = particle.update();
+                if (!isAlive) particle.element.remove(); 
+                return isAlive;
+            });
+
+            if (particles.length > 0) {
+                requestAnimationFrame(animate);
+            } else {
+                isAnimating = false; 
+            }
+        };
+        
+        requestAnimationFrame(animate);
+    });
+  }
+});
+// 1.5. ENTRADA DA JANELA DA AGÊNCIA (EFEITO ABRINDO)
+  const agencyWindowElem = document.getElementById('agency-window');
+  if (agencyWindowElem) {
+    ScrollTrigger.create({
+      trigger: ".agency-section",
+      start: "top 75%", // Quando o topo da seção atingir 75% da altura da tela
+      onEnter: () => {
+        agencyWindowElem.classList.add('is-visible');
+      }
+    });
+  }
