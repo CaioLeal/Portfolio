@@ -368,18 +368,22 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (agencyWindow && starContainer) {
     // 1. Criar estrelas de fundo que ficam piscando (Ambient Twinkle)
-    const count = 40;
+    const count = 80; // Bastante estrela
     for (let i = 0; i < count; i++) {
       const s = document.createElement('div');
       s.className = 'agency-star';
       
-      const size = Math.random() * 2 + 1;
+      const x = Math.random() * 100;
+      const y = Math.random() * 100; 
+      const isStatic = Math.random() < 0.3;
+      const size = isStatic ? 1 + Math.random() : 1 + Math.random() * 2; 
+
+      s.style.left = x + '%';
+      s.style.top = y + '%';
       s.style.width = size + 'px';
       s.style.height = size + 'px';
-      s.style.left = Math.random() * 100 + '%';
-      s.style.top = Math.random() * 100 + '%';
-      s.style.setProperty('--duration', (2 + Math.random() * 3) + 's');
-      s.style.animationDelay = (Math.random() * 3) + 's';
+      s.style.setProperty('--duration', (2 + Math.random() * 4) + 's');
+      s.style.animationDelay = (Math.random() * 5) + 's';
       
       starContainer.appendChild(s);
     }
