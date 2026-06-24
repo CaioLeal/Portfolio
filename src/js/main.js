@@ -1,7 +1,6 @@
 import gsap from 'gsap';
 import * as THREE from 'three';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { initOcean } from './ocean.js'; 
 import { initTechBubbles } from './bubbles.js';
 import './holidays.js';
 
@@ -17,13 +16,6 @@ const themeToggleBtn = document.getElementById('theme-toggle');
 const moodText = document.getElementById('ocean-mood');
 const timeText = document.getElementById('ocean-time');
 
-// Inicia o Oceano
-initOcean((palette, time, mood) => {
-  if(moodText) moodText.innerText = mood;
-  if(timeText) timeText.innerText = time;
-  htmlTag.style.setProperty('--accent', `rgb(${palette.skyHor[0]}, ${palette.skyHor[1]}, ${palette.skyHor[2]})`);
-  htmlTag.style.setProperty('--glass-color', `rgb(${palette.wNear[0]}, ${palette.wNear[1]}, ${palette.wNear[2]})`);
-});
 
 if (themeToggleBtn) {
   themeToggleBtn.addEventListener('click', () => {

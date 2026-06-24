@@ -1,21 +1,73 @@
 /* ==========================================
-   1. VARIÁVEIS E CONFIGURAÇÕES GLOBAIS
+   1. VARIÁVEIS E FUNDO (DARK NEON GLOW)
 ========================================== */
 :root {
-  /* Tema Claro (Padrão) */
-  --bg-color: transparent; 
-  --text-color: #070709; 
-  --pill-bg: rgba(255, 255, 255, 0.4); 
-  --glass-border: rgba(255, 255, 255, 0.4);
+  /* Tema Escuro Fixo */
+  --bg-color: #050507; 
+  --text-color: #ffffff; 
+  --pill-bg: rgba(10, 16, 28, 0.4); 
+  --glass-border: rgba(255, 255, 255, 0.1);
   
-  /* Cores dinâmicas injetadas pelo Oceano JS */
-  --accent: #ff7e54; 
-  --glass-color: #6fa8d4;
+  /* Cores Neon (Baseadas na Cosmus Agency) */
+  --accent: #a259ff;       /* Roxo Cosmus */
+  --glass-color: #32cfc9;  /* Ciano / Menta */
+  --neon-pink: #ff4fa3;    /* Rosa Neon para destaque */
+}
 
-  /* APAGAR DEPOIS */
-  --tech-bubble: rgba(255,255,255,0.25);
-  --neon-glow: rgba(255,126,84,0.4);
-  --neon-accent: #ff7e54;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: var(--bg-color); 
+  color: var(--text-color);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* --- Manchas de Luz Neon (Blobs) --- */
+.blob {
+  position: fixed;
+  width: 25vw;
+  min-width: 600px;
+  aspect-ratio: 1;
+  border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+  filter: blur(120px); /* Muito desfoque para criar o GLOW */
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: -1;
+  animation: morph 12s ease-in-out infinite alternate;
+}
+
+.blob-one {
+  left: -10vw;
+  top: 5vh;
+  background: var(--accent); /* Roxo */
+}
+
+.blob-two {
+  right: -10vw;
+  bottom: 5vh;
+  background: var(--glass-color); /* Ciano */
+  animation-delay: -4s;
+}
+
+.blob-three {
+  left: 30vw;
+  bottom: -20vh;
+  width: 30vw;
+  background: var(--neon-pink); /* Rosa */
+  animation-delay: -2s;
+}
+
+@keyframes morph {
+  0% { 
+    border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%; 
+    transform: rotate(0deg) scale(1); 
+  }
+  100% { 
+    border-radius: 70% 30% 42% 58% / 40% 65% 35% 60%; 
+    transform: rotate(20deg) scale(1.1); 
+  }
 }
 
 .scroller::-webkit-scrollbar {
@@ -41,16 +93,6 @@
   --text-color: #ffffff;
   --pill-bg: rgba(10, 16, 28, 0.4);
   --glass-border: rgba(255, 255, 255, 0.1);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  background-color: #e8dbc8; 
-  color: var(--text-color);
-  font-family: 'Space Grotesk', sans-serif;
-  overflow-x: hidden;
-  transition: color 0.5s ease;
 }
 
 /* ==========================================
@@ -189,8 +231,8 @@ body {
 .role { font-size: 2rem; font-weight: 700; margin-bottom: 24px; }
 .bio { font-size: 1rem; line-height: 1.7; opacity: 0.8; margin-bottom: 40px; }
 
-#name-shader-container { width: 100%; height: 140px; position: relative; margin-bottom: 10px; }
-#name-shader-container canvas { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 100% !important; height: 100% !important; outline: none; }
+#name-shader-container { width: 100%; height: 140px; position: relative; margin-bottom: 10px;}
+#name-shader-container canvas { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 100% !important; height: 100% !important; outline: none;}
 
 .hero-buttons { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; opacity: 0; }
 .btn-outline { padding: 12px 28px; border-radius: 30px; border: 1px solid var(--glass-border); color: var(--text-color); text-decoration: none; font-weight: 600; transition: all 0.3s; background: var(--pill-bg); backdrop-filter: blur(10px); }

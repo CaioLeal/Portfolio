@@ -14,8 +14,9 @@
   </head>
 
   <body>
-    
-    <canvas id="ocean" style="position: fixed; inset: 0; z-index: 0; pointer-events: none;"></canvas>
+    <div class="blob blob-one"></div>
+    <div class="blob blob-two"></div>
+    <div class="blob blob-three"></div>
 
     <header class="navbar-wrapper">
       <div class="navbar-border-anim">
@@ -28,27 +29,21 @@
           <ul class="nav-links">
             <li><a href="#inicio" class="active">Início</a></li>
             <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#formacoes">Formações</a></li>
-            <li><a href="#duvidas">Duvidas</a></li>
+            <li><a href="#projetos">Projetos</a></li>
             <li><a href="#servicos">Serviços</a></li>
             <li><a href="#contato">Contato</a></li>
           </ul>
 
           <div class="nav-actions">
-            <div class="time-widget">
-              <div class="time-info">
-                <span id="ocean-mood">DIA</span>
-                <span id="ocean-time">12:00</span>
-              </div>
-              <button id="theme-toggle" class="icon-btn" aria-label="Forçar Noite">☀️</button>
-            </div>
+            <!-- Botão Fale Comigo (Sem o relógio/tema ao lado) -->
+            <a href="#contato" class="btn-neon">Fale Comigo</a>
             
-            <a href="#fale-comigo" class="btn-neon">Fale Comigo</a>
-            
+            <!-- Menu Mobile (Hambúrguer) -->
             <button class="hamburger">
               <span></span><span></span><span></span>
             </button>
           </div>
+          
         </nav>
       </div>
     </header>
