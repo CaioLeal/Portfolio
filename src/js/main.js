@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initTechBubbles } from './bubbles.js';
 import './holidays.js';
+import './themes.js';
 
 // Registra os plugins e inicia as bolhas de tecnologias
 gsap.registerPlugin(ScrollTrigger);

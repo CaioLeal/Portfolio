@@ -4,3 +4,22 @@ Reagir a cliques
 Fazer expressões conforme ações do usuário
 Responder a comandos de voz
 Integrar com IA
+
+Configurar font theme.js
+Como configurar a fonte do GTA (Opcional)
+Se você optar por não usar imagem para a logo (tipo: "imagem") e quiser usar a fonte real do GTA V / Vice City (tipo: "fonte"), basta baixar a fonte "Pricedown" na internet e chamá-la no topo do seu style.css com o @font-face que você já domina:
+
+CSS
+@font-face {
+  font-family: 'Pricedown';
+  src: url('/font/pricedown.ttf') format('truetype');
+}
+
+E então lá no arquivo themes.js você coloca:
+
+JavaScript
+estiloNome: {
+    ativo: true,
+    tipo: "fonte",
+    valor: "'Pricedown', sans-serif" 
+}

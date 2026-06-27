@@ -1168,6 +1168,97 @@ body {
   }
 }
 
+/* ==========================================
+   MENU MOBILE OVERLAY & HAMBÚRGUER
+========================================== */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 5, 7, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.mobile-nav-links a {
+  color: var(--text-color);
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.mobile-nav-links a:hover {
+  color: var(--accent);
+}
+
+/* Animação do X no Hambúrguer */
+.hamburger { position: relative; z-index: 1000; }
+.hamburger.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+
+/* ==========================================
+   CORREÇÃO BOTÕES DA HERO NO MOBILE
+========================================== */
+.hero-btn-group {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* 2. Arruma o Menu Mobile (Descola do link Contato e centraliza) */
+.mobile-menu .btn-neon {
+  margin: 20px 0 0 0 !important; /* 20px de espaço em cima, 0 nos lados */
+}
+
+/* 3. Responsividade Celular (Botões 50/50 e ícones embaixo) */
+@media (max-width: 600px) {
+  .hero-buttons {
+    flex-direction: column; /* Joga os ícones sociais pra baixo */
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .hero-btn-group {
+    width: 100%;
+    gap: 10px;
+    display: flex;
+  }
+  
+  .hero-btn-group a {
+    flex: 1; /* Faz os botões dividirem o espaço 50% / 50% */
+    text-align: center;
+    padding: 14px 0; 
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .social-links {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
 /* Responsividade: No celular volta a empilhar um embaixo do outro */
 @media (max-width: 900px) {
   .agency-content {
@@ -1186,6 +1277,44 @@ body {
     margin-top: 40px;
     width: 220px;
     height: 220px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+  }
+
+  /* 2. Coloca os dois botões (Seu e Cosmus) lado a lado com o mesmo tamanho */
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Criamos um container só para os dois botões ficarem lado a lado */
+  .footer-buttons-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    order: 2; /* Fica abaixo dos links */
+  }
+
+  .magic-badge {
+    width: 140px; /* Tamanho igual para os dois */
+    height: 70px;
+  }
+
+  /* 3. Ajusta a ordem dos elementos */
+  .footer-links { 
+    order: 1; /* Links ficam no topo */
+    margin-bottom: 10px; 
+  }
+  
+  .footer-credits {
+    flex-direction: column;
+    gap: 15px;
   }
 }
 
@@ -1236,9 +1365,28 @@ body {
   .hamburger { display: flex; }
 }
 @media (max-width: 1000px) {
-  .about-hero-bio, .about-copy-content { width: 90%; }
-  .about-hero-portrait { width: 40%; top: 50%; }
-  .stats-row { flex-direction: column; }
+  /* 1. Deixa a caixa mais larga (95%) e menos alta (padding e gap menores) */
+  .about-hero-bio { 
+    width: 115%; 
+    padding: 20px 15px; 
+    gap: 1em; 
+  }
+  
+  .about-copy-content { 
+    width: 90%; 
+  }
+  
+  /* 2. Sobe a foto (top: 30%) para ela aparecer em cima da caixa preta */
+  .about-hero-portrait { 
+    width: 60%; 
+    top: 45%; 
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(8deg);
+  }
+  
+  .stats-row { 
+    flex-direction: column; 
+  }
 }
 @media (max-width: 992px) {
   .hero-content { flex-direction: column; text-align: center; }
