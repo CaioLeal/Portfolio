@@ -9,13 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
             fim: { mes: 12, dia: 31 },
             cores: {
                 // O gradiente de background que você passou
-                fundo: "linear-gradient(to right, #ab56b4, #3d36ac, #f2e4df, #d39f9d, #e1682b)",
+                fundo: "linear-gradient(to right, #6842b4, #3240c1, #913da7, #d04ba7, #d22c83)",
                 // Ajuste de cores das variáveis do CSS
-                accent: "#e1682b",       // Laranja GTA para botões e detalhes
+                accent: "#d04ba7",       // Laranja GTA para botões e detalhes
                 glassColor: "#ab56b4",   // Roxo GTA
                 neonPink: "#d39f9d",
                 // Navbar e Cards mais escuros para dar leitura em cima do fundo colorido
-                pillBg: "linear-gradient(to right, #3d36ac, #ab56b4, #e1682b, #3d36ac)", 
+                pillBg: "linear-gradient(to right, #3240c1, #913da7, #d04ba7, #6842b4)", 
                 glassBorder: "rgba(255, 255, 255, 0.2)"
             },
             blobsAtivos: false, // Desliga as luzes de fundo (blobs)
