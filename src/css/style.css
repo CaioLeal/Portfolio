@@ -14,6 +14,13 @@
   --neon-pink: #ff4fa3;    /* Rosa Neon para destaque */
 }
 
+@font-face {
+  font-family: 'Pricedown';
+  src: url('/src/font/Pricedown\ Bl.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
