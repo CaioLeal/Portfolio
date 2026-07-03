@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const temas = {
         gta6: {
             ativo: true, // Ativado para você testar
-            inicio: { mes: 1, dia: 19 }, 
-            fim: { mes: 12, dia: 31 },
+            inicio: { mes: 11, dia: 16 }, 
+            fim: { mes: 11, dia: 30 },
             cores: {
                 // O gradiente de background que você passou
                 fundo: "linear-gradient(135deg,rgba(48, 63, 190, 1) 0%, rgba(105, 66, 180, 1) 15%, rgba(200, 142, 198, 1) 25%, rgba(206, 76, 169, 1) 35%)",

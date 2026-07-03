@@ -23,3 +23,5 @@ estiloNome: {
     tipo: "fonte",
     valor: "'Pricedown', sans-serif" 
 }
+
+Cor anterior: fundo: "linear-gradient(to right, #6842b4, #3240c1, #913da7, #d04ba7, #d22c83)",
