@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // =======================================================
     const feriados = {
         saoJoao: {
-            ativo: true, // Ativo para você testar as fogueiras agora!
+            ativo: false, // Ativo para você testar as fogueiras agora!
             inicio: { mes: 7, dia: 1 },
             fim: { mes: 7, dia: 31 },
             novoAvatar: "", // Ex: "/img/caio-caipira.png"
