@@ -28,18 +28,52 @@
           </div>
           
           <ul class="nav-links">
-            <li><a href="#inicio" class="active">Início</a></li>
-            <li><a href="#sobre">Sobre</a></li>
-            <li><a href="#projetos">Projetos</a></li>
-            <li><a href="#servicos">Serviços</a></li>
-            <li><a href="#contato">Contato</a></li>
+            <!-- Adicionamos data-i18n em todos os links -->
+            <li><a href="#inicio" class="active" data-i18n="nav-home">Início</a></li>
+            <li><a href="#sobre" data-i18n="nav-about">Sobre</a></li>
+            <li><a href="#projetos" data-i18n="nav-projects">Projetos</a></li>
+            <li><a href="#servicos" data-i18n="nav-services">Serviços</a></li>
+            <li><a href="#contato" data-i18n="nav-contact">Contato</a></li>
           </ul>
 
           <div class="nav-actions">
-            <!-- Botão Fale Comigo (Sem o relógio/tema ao lado) -->
-            <a href="#contato" class="btn-neon">Fale Comigo</a>
             
-            <!-- Menu Mobile (Hambúrguer) -->
+            <!-- ====== NOVO: SELETOR DE IDIOMAS ====== -->
+            <div class="lang-switcher">
+              <button class="lang-btn" id="currentLangBtn">
+                <i class="fa-solid fa-globe"></i>
+              </button>
+            
+              <ul class="lang-dropdown" id="langDropdown">
+                <li class="lang-option" data-lang="pt-BR">
+                  <img src="/img/flags/pt-br.jpg" alt="PT-BR" class="flag-icon" onerror="this.style.display='none'"> Português (BR)
+                </li>
+                <li class="lang-option" data-lang="en">
+                  <img src="/img/flags/en.jpg" alt="EN" class="flag-icon" onerror="this.style.display='none'"> English
+                </li>
+                <li class="lang-option" data-lang="es">
+                  <img src="/img/flags/es.jpg" alt="ES" class="flag-icon" onerror="this.style.display='none'"> Español
+                </li>
+                <li class="lang-option" data-lang="it">
+                  <img src="/img/flags/it.jpg" alt="IT" class="flag-icon" onerror="this.style.display='none'"> Italiano
+                </li>
+                <li class="lang-option" data-lang="fr">
+                  <img src="/img/flags/fr.jpg" alt="FR" class="flag-icon" onerror="this.style.display='none'"> Français
+                </li>
+                <li class="lang-option" data-lang="de">
+                  <img src="/img/flags/de.jpg" alt="DE" class="flag-icon" onerror="this.style.display='none'"> Deutsch
+                </li>
+                <li class="lang-option" data-lang="pl">
+                  <img src="/img/flags/pl.jpg" alt="PL" class="flag-icon" onerror="this.style.display='none'"> Polski
+                </li>
+                <li class="lang-option" data-lang="ja">
+                  <img src="/img/flags/jp.jpg" alt="JA" class="flag-icon" onerror="this.style.display='none'"> 日本語
+                </li>
+              </ul>
+            </div>
+            
+            <a href="#contato" class="btn-neon" data-i18n="nav-contact-btn">Fale Comigo</a>
+            
             <button class="hamburger">
               <span></span><span></span><span></span>
             </button>
@@ -48,16 +82,17 @@
         </nav>
       </div>
     </header>
-    <!-- Menu Hamburguer -->
+    
+    <!-- Menu Hamburguer Mobile -->
     <div class="mobile-menu">
       <ul class="mobile-nav-links">
-        <li><a href="#inicio">Início</a></li>
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#projetos">Projetos</a></li>
-        <li><a href="#servicos">Serviços</a></li>
-        <li><a href="#contato">Contato</a></li>
+        <li><a href="#inicio" data-i18n="nav-home">Início</a></li>
+        <li><a href="#sobre" data-i18n="nav-about">Sobre</a></li>
+        <li><a href="#projetos" data-i18n="nav-projects">Projetos</a></li>
+        <li><a href="#servicos" data-i18n="nav-services">Serviços</a></li>
+        <li><a href="#contato" data-i18n="nav-contact">Contato</a></li>
       </ul>
-      <a href="#contato" class="btn-neon mobile-btn">Fale Comigo</a>
+      <a href="#contato" class="btn-neon mobile-btn" data-i18n="nav-contact-btn">Fale Comigo</a>
     </div>
 
     <div id="theme-wave" class="theme-wave"></div>
@@ -66,17 +101,17 @@
     <main class="hero-section" id="inicio">
       <div class="hero-content">
         <div class="hero-text-area">
-          <p class="greeting typing-target" data-text="OLÁ, EU SOU"></p>
+          <p class="greeting typing-target" data-text="OLÁ, EU SOU" data-i18n="hero-greeting"></p>
           
           <div id="name-shader-container" aria-label="Caio Leal"></div>
           
-          <h2 class="role typing-target" data-text="Desenvolvedor Full Stack & Web"></h2>
-          <p class="bio typing-target" data-text="Com 3 anos de experiência, crio soluções web completas com foco na experiência do usuário. Especialista na concepção de interfaces responsivas e implementação de funcionalidades dinâmicas para resolver problemas reais."></p>
+          <h2 class="role typing-target" data-text="Desenvolvedor Full Stack & Web" data-i18n="hero-role"></h2>
+          <p class="bio typing-target" data-text="Com 3 anos de experiência, crio soluções web completas com foco na experiência do usuário. Especialista na concepção de interfaces responsivas e implementação de funcionalidades dinâmicas para resolver problemas reais." data-i18n="hero-bio"></p></p>
 
           <div class="hero-buttons">
             <div class="hero-btn-group">
-              <a href="#projetos" class="btn-neon">Ver projetos</a>
-              <a href="#contato" class="btn-outline">Entre em contato</a>
+              <a href="#projetos" class="btn-neon" data-i18n="hero-projects-btn">Ver projetos</a>
+              <a href="#contato" class="btn-outline" data-i18n="hero-contact-btn">Entre em contato</a>
             </div>
             
             <div class="social-links">
@@ -103,14 +138,14 @@
       
       <div class="about-hero">
         <div class="about-hero-header">
-          <h1>Olá, eu sou</h1>
+          <h1 data-i18n="about-title">Olá, eu sou</h1>
           <h1 class="highlight">Caio Leal</h1>
         </div>
         <div class="about-hero-bio">
-          <p class="ss">
+          <p class="ss" data-i18n="about-bio">
             Sou um profissional apaixonado por desenvolvimento de software e focado em criar soluções digitais completas. Do planejamento arquitetônico de sistemas backend robustos à lapidação de interfaces pixel-perfect no frontend, vivo na interseção onde o design inteligente encontra o código limpo.
           </p>
-          <p class="mn">Front-end / Back-end / Design / Repetir</p>
+          <p class="mn" data-i18n="about-stack">Front-end / Back-end / Design / Repetir</p>
         </div>
         <div class="about-hero-portrait">
           <img src="/img/heroimg2.png" alt="Caio Leal Portrait" />
@@ -130,21 +165,21 @@
       <div class="stats">
         <div class="stats-row">
           <div class="stats-col stats-header">
-            <h2 style="font-size: 3rem; margin-bottom: 10px;">Trajetória</h2>
-            <p style="color: #aab9c6;">Um resumo da minha jornada na tecnologia até agora.</p>
+            <h2 style="font-size: 3rem; margin-bottom: 10px;" data-i18n="stats-title">Trajetória</h2>
+            <p style="color: #aab9c6;" data-i18n="stats-desc">Um resumo da minha jornada na tecnologia até agora.</p>
           </div>
           <div class="stats-col" style="flex: 3; gap: 2em; display: flex; flex-direction: row; flex-wrap: wrap;">
             <div class="stats-item-1">
               <h3 style="font-size: 3rem; color: var(--neon-accent);">3+</h3>
-              <p>Anos de Experiência</p>
+              <p data-i18n="stats-years">Anos de Experiência</p>
             </div>
             <div class="stats-item-2">
               <h3 style="font-size: 3rem; color: var(--neon-accent);">30+</h3>
-              <p>Projetos Autorais e Freelancers</p>
+              <p data-i18n="stats-projects">Projetos Autorais e Freelancers</p>
             </div>
             <div class="stats-item-3">
               <h3 style="font-size: 2rem;">Full Stack</h3>
-              <p>Domínio de ponta a ponta</p>
+              <p data-i18n="stats-fullstack">Domínio de ponta a ponta</p>
             </div>
           </div>
         </div>
@@ -155,8 +190,8 @@
     <!-- #################### CERTIFICATES #################### -->
      <section id="formacoes" class="education-container">
       <div class="section-header">
-        <h2 class="section-title">Minhas Formações</h2>
-        <p class="section-subtitle">Aprendizado contínuo e aprimoramento técnico.</p>
+        <h2 class="section-title" data-i18n="education-title">Minhas Formações</h2>
+        <p class="section-subtitle" data-i18n="education-subtitle">Aprendizado contínuo e aprimoramento técnico.</p>
       </div>
 
       <div class="edu-grid">
@@ -167,14 +202,14 @@
               <div class="edu-logo">
                 <img src="/img/uninove.png" alt="Uninove" onerror="this.style.display='none'; this.parentNode.innerHTML='UNI'">
               </div>
-              <span class="edu-status status-progress">Em Andamento</span>
+              <span class="edu-status status-progress" data-i18n="education-current">Em Andamento</span>
             </div>
             <h3 class="edu-course">Análise e Desenvolvimento de Sistemas</h3>
             <p class="edu-school">Uninove</p>
             <p class="edu-date">Julho/2025 — Atualmente</p>
             <div class="edu-progress-container">
               <div class="edu-progress-info">
-                <span>Progresso Geral</span>
+                <span data-i18n="education-progress">Progresso Geral</span>
                 <span class="progress-percent" data-target="40">0%</span>
               </div>
               <div class="progress-bar-bg">
@@ -190,14 +225,14 @@
               <div class="edu-logo">
                 <img src="/img/fiap.png" alt="FIAP" onerror="this.style.display='none'; this.parentNode.innerHTML='FP'">
               </div>
-              <span class="edu-status status-progress">Quase lá</span>
+              <span class="edu-status status-progress" data-i18n="education-almost">Quase lá</span>
             </div>
             <h3 class="edu-course">Python Development</h3>
             <p class="edu-school">FIAP</p>
             <p class="edu-date">Previsto: Julho/2026</p>
             <div class="edu-progress-container">
               <div class="edu-progress-info">
-                <span>Progresso do Curso</span>
+                <span data-i18n="education-course-progress">Progresso do Curso</span>
                 <span class="progress-percent" data-target="90">0%</span>
               </div>
               <div class="progress-bar-bg">
@@ -213,14 +248,14 @@
               <div class="edu-logo">
                 <img src="/img/fiap.png" alt="FIAP" onerror="this.style.display='none'; this.parentNode.innerHTML='FJ'">
               </div>
-              <span class="edu-status status-progress">Quase lá</span>
+              <span class="edu-status status-progress" data-i18n="education-almost">Quase lá</span>
             </div>
             <h3 class="edu-course">Java Development</h3>
             <p class="edu-school">FIAP</p>
             <p class="edu-date">Previsto: Julho/2026</p>
             <div class="edu-progress-container">
               <div class="edu-progress-info">
-                <span>Progresso do Curso</span>
+                <span data-i18n="education-course-progress">Progresso do Curso</span>
                 <span class="progress-percent" data-target="90">0%</span>
               </div>
               <div class="progress-bar-bg">
@@ -236,14 +271,14 @@
               <div class="edu-logo">
                 <img src="/img/udemy.png" alt="Udemy" onerror="this.style.display='none'; this.parentNode.innerHTML='UD'">
               </div>
-              <span class="edu-status status-completed">Concluído</span>
+              <span class="edu-status status-completed" data-i18n="education-completed">Concluído</span>
             </div>
             <h3 class="edu-course">Desenvolvimento Full Stack (JS e PHP)</h3>
             <p class="edu-school">Udemy</p>
             <p class="edu-date">Concluído em Junho/2025</p>
             <div class="edu-progress-container">
               <div class="edu-progress-info">
-                <span>Progresso do Curso</span>
+                <span data-i18n="education-course-progress">Progresso do Curso</span>
                 <span class="progress-percent" data-target="100">0%</span>
               </div>
               <div class="progress-bar-bg">
@@ -266,7 +301,7 @@
             <p class="edu-date">Concluído em Janeiro/2025</p>
             <div class="edu-progress-container">
               <div class="edu-progress-info">
-                <span>Progresso do Curso</span>
+                <span data-i18n="education-course-progress">Progresso do Curso</span>
                 <span class="progress-percent" data-target="100">0%</span>
               </div>
               <div class="progress-bar-bg">
@@ -287,14 +322,14 @@
         <div class="agency-content">
           
           <div class="agency-info">
-            <span class="agency-kicker">Criador e Fundador</span>
+            <span class="agency-kicker" data-i18n="agency-role">Criador e Fundador</span>
             
             <div class="agency-brand">
               <img src="/img/cosmosico.png" alt="Cosmos Logo" class="agency-logo" onerror="this.style.display='none'">
               <h2 class="agency-title">Cosmus Agency</h2>
             </div>
 
-            <a href="https://cosmusagency.vercel.app/" target="_blank" class=" agency-btn">Visite aqui</a>
+            <a href="https://cosmusagency.vercel.app/" target="_blank" class="agency-btn" data-i18n="agency-btn">Visite aqui</a>
           </div>
 
           <div class="agency-right">
@@ -310,19 +345,18 @@
     <!-- #################### SERVICES #################### -->
     <section id="duvidas" class="services-container">
       <div class="section-header">
-        <h2 class="section-title">Como posso contribuir?</h2>
-        <p class="section-subtitle">Minhas principais áreas de atuação.</p>
+        <h2 class="section-title" data-i18n="services-title">Como posso contribuir?</h2>
+        <p class="section-subtitle" data-i18n="services-subtitle">Minhas principais áreas de atuação.</p>
       </div>
-
       <div class="services">
         <div class="service-card" id="service-card-1">
           <div class="service-card-inner">
             <div class="service-card-content">
-              <h1>Frontend Development</h1>
-              <p>Criação de interfaces imersivas, responsivas e de alta performance utilizando HTML, CSS, JavaScript, React e animações fluidas com GSAP.</p>
+              <h1 data-i18n="service1-title">Frontend Development</h1>
+              <p data-i18n="service1-desc">Criação de interfaces imersivas, responsivas e de alta performance utilizando HTML, CSS, JavaScript, React e animações fluidas com GSAP.</p>
             </div>
             <div class="service-card-img">
-              <div class="service-icon-placeholder">🎨</div>
+              <img src="img/service/frontend.jpg" alt="Design" class="service-icon">
             </div>
           </div>
         </div>
@@ -330,11 +364,11 @@
         <div class="service-card" id="service-card-2">
           <div class="service-card-inner">
             <div class="service-card-content">
-              <h1>Backend Development</h1>
-              <p>Desenvolvimento de APIs seguras e escaláveis, arquitetura de banco de dados e lógica de servidores utilizando Python, Java e PHP.</p>
+              <h1 data-i18n="service2-title">Backend Development</h1>
+              <p data-i18n="service2-desc">Desenvolvimento de APIs seguras e escaláveis, arquitetura de banco de dados e lógica de servidores utilizando Python, Java e PHP.</p>
             </div>
             <div class="service-card-img">
-              <div class="service-icon-placeholder">⚙️</div>
+              <img src="img/service/backend.jpg" alt="Design" class="service-icon">
             </div>
           </div>
         </div>
@@ -342,11 +376,11 @@
         <div class="service-card" id="service-card-3">
           <div class="service-card-inner">
             <div class="service-card-content">
-              <h1>UI/UX Design</h1>
-              <p>Prototipação de interfaces focadas na experiência do usuário, aliando estética e usabilidade para reter a atenção do cliente final.</p>
+              <h1 data-i18n="service3-title">UI/UX Design</h1>
+              <p data-i18n="service3-desc">Prototipação de interfaces focadas na experiência do usuário, aliando estética e usabilidade para reter a atenção do cliente final.</p>
             </div>
             <div class="service-card-img">
-              <div class="service-icon-placeholder">✨</div>
+              <img src="img/service/uiux.jpg" alt="Design" class="service-icon">
             </div>
           </div>
         </div>
@@ -354,25 +388,25 @@
         <div class="service-card" id="service-card-4">
           <div class="service-card-inner">
             <div class="service-card-content">
-              <h1>Web Applications</h1>
-              <p>Soluções Full Stack de ponta a ponta. Da concepção do banco de dados até o deploy na nuvem da sua aplicação web completa.</p>
+              <h1 data-i18n="service4-title">Web Applications</h1>
+              <p data-i18n="service4-desc">Soluções Full Stack de ponta a ponta. Da concepção do banco de dados até o deploy na nuvem da sua aplicação web completa.</p>
             </div>
             <div class="service-card-img">
-              <div class="service-icon-placeholder">🚀</div>
+              <img src="img/service/web.jpg" alt="Design" class="service-icon">
             </div>
           </div>
         </div>
       </div>
     </section>
 
-        <!-- #################### CONTACT #################### -->
+    <!-- #################### CONTACT #################### -->
     <section id="contato" class="contact-cta">
       <a href="mailto:seu-email@exemplo.com" class="contact-button-glass">
         <div class="contact-text-small">
-          <p>Vamos construir algo incrível juntos.</p>
+          <p data-i18n="contact-small">Vamos construir algo incrível juntos.</p>
         </div>
         <div class="contact-text-large">
-          <h1>Entre em contato</h1>
+          <h1 data-i18n="contact-large">Entre em contato</h1>
         </div>
       </a>
     </section>
@@ -380,14 +414,12 @@
     <!-- #################### CARROUSEL #################### -->
     <section id="projetos" class="projects-container">
       <div class="section-header">
-        <h2 class="section-title">Projetos Recentes</h2>
-        <p class="section-subtitle">Um pouco do meu portfólio e trabalhos anteriores.</p>
+        <h2 class="section-title" data-i18n="projects-title">Projetos Recentes</h2>
+        <p class="section-subtitle" data-i18n="projects-subtitle">Um pouco do meu portfólio e trabalhos anteriores.</p>
       </div>
 
       <div class="carousel-wrapper">
-        <button class="carousel-btn prev-btn" aria-label="Anterior">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
+        <button class="carousel-btn prev-btn" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
 
         <div class="projects-carousel" id="projects-track">
           
@@ -396,14 +428,10 @@
               <img src="/img/imgprojetos/skilltrackcapa.jpg" alt="Apolo Veículos" onerror="this.src='https://placehold.co/600x400/1a3fa0/ffffff?text=Apolo+Veiculos'">
             </div>
             <div class="project-content">
-              <span class="project-category">Sistema web</span>
+              <span class="project-category" data-i18n="project1-category">Sistema web</span>
               <h3>SkillTrack</h3>
-              <p>Plataforma de análise esportiva com cadastro, edição e gerenciamento de atletas integrada ao Supabase.</p>
-              <div class="project-tags">
-                <span>Full Stack</span>
-                <span>GSAP</span>
-                <span>Supabase</span>
-              </div>
+              <p data-i18n="project1-desc">Plataforma de análise esportiva com cadastro, edição e gerenciamento de atletas integrada ao Supabase.</p>
+              <div class="project-tags"><span>Full Stack</span><span>GSAP</span><span>Supabase</span></div>
             </div>
           </a>
 
@@ -412,92 +440,75 @@
               <img src="/img/imgprojetos/iphonecapa.jpg" alt="Funko Log" onerror="this.src='https://placehold.co/600x400/5b8cdb/ffffff?text=Funko+Log'">
             </div>
             <div class="project-content">
-              <span class="project-category">Landing Page</span>
+              <span class="project-category" data-i18n="project2-category">Landing Page</span>
               <h3>Iphone 17 Pro Max</h3>
-              <p>Landing page inspirada na Apple com animações fluidas, troca dinâmica de cores e experiência visual premium desenvolvida em React.</p>
-              <div class="project-tags">
-                <span>React</span>
-                <span>Tailwind</span>
-                <span>Vite</span>
-              </div>
+              <p data-i18n="project2-desc">Landing page inspirada na Apple com animações fluidas, troca dinâmica de cores e experiência visual premium desenvolvida em React.</p>
+              <div class="project-tags"><span>React</span><span>Tailwind</span><span>Vite</span></div>
             </div>
           </a>
 
           <a class="project-card-glass" href="pages/porsche-landing-page.html">
             <div class="project-img-wrapper">
-              <img src="/img/imgprojetos/porschecapa.jpg" alt="Porsche Experience"
-                onerror="this.src='https://placehold.co/600x400/111111/ffffff?text=Porsche+Experience'">
+              <img src="/img/imgprojetos/porschecapa.jpg" alt="Porsche Experience" onerror="this.src='https://placehold.co/600x400/111111/ffffff?text=Porsche+Experience'">
             </div>
             <div class="project-content">
-              <span class="project-category">Landing Page Premium</span>
+              <span class="project-category" data-i18n="project3-category">Landing Page Premium</span>
               <h3>Porsche Experience</h3>
-              <p>Landing page inspirada na Porsche com animações cinematográficas, navegação imersiva e experiência visual de alto
-                padrão.</p>
-              <div class="project-tags">
-                <span>JavaScript</span>
-                <span>GSAP</span>
-                <span>Swiper.js</span>
-              </div>
+              <p data-i18n="project3-desc">Landing page inspirada na Porsche com animações cinematográficas, navegação imersiva e experiência visual de alto padrão.</p>
+              <div class="project-tags"><span>JavaScript</span><span>GSAP</span><span>Swiper.js</span></div>
             </div>
           </a>
 
-          <a class="project-card-glass" href="pages/album-do-amor.html"> <!-- Link Projeto -->
+          <a class="project-card-glass" href="pages/album-do-amor.html">
             <div class="project-img-wrapper">
               <img src="/img/imgprojetos/albumcapa.jpg" alt="Álbum do Amor" onerror="this.src='https://placehold.co/600x400/ff7e54/ffffff?text=Album+do+Amor'">
             </div>
             <div class="project-content">
-              <span class="project-category">Interativo</span>
+              <span class="project-category" data-i18n="project4-category">Interativo</span>
               <h3>Álbum do Amor</h3>
-              <p>Experiência digital interativa com sistema de pacotinhos de figurinhas e animações WebGL.</p>
-              <div class="project-tags">
-                <span>Javascript</span>
-                <span>GSAP</span>
-                <span>Back-End</span>
-              </div>
+              <p data-i18n="project4-desc">Experiência digital interativa com sistema de pacotinhos de figurinhas e animações WebGL.</p>
+              <div class="project-tags"><span>Javascript</span><span>GSAP</span><span>Back-End</span></div>
             </div>
           </a>
 
-          </div>
-
-        <button class="carousel-btn next-btn" aria-label="Próximo">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
+        </div>
+        <button class="carousel-btn next-btn" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
     </section>
 
     <!-- #################### FOOTER #################### -->
     <footer class="site-footer">
-      <div class="newsletter">
-
-      </div>
+      <div class="newsletter"></div>
 
       <div class="footer-bottom">
-        <a href="#" class="magic-badge" title="Meu Projeto">
-          <img src="/img/caio-buttom-transparent.png" alt="Meu Botão">
-          <i class="fa-solid fa-gamepad particle p1"></i>
-          <i class="fa-solid fa-code particle p2"></i>
-          <i class="fa-solid fa-headset particle p3"></i>
-          <i class="fa-solid fa-robot particle p4"></i>
-          <i class="fa-solid fa-laptop-code particle p5"></i>
-        </a>
+        <div class="footer-buttons-wrapper">
+          <a href="#" class="magic-badge" title="Meu Projeto">
+            <img src="/img/caio-buttom-transparent.png" alt="Meu Botão">
+            <i class="fa-solid fa-gamepad particle p1"></i>
+            <i class="fa-solid fa-code particle p2"></i>
+            <i class="fa-solid fa-headset particle p3"></i>
+            <i class="fa-solid fa-robot particle p4"></i>
+            <i class="fa-solid fa-laptop-code particle p5"></i>
+          </a>
+          
+          <a href="https://cosmusagency.vercel.app/" target="_blank" class="magic-badge" title="Criado por Cosmos Agency">
+            <img src="/img/Cosmus-Buttom-Transparent.gif" alt="Cosmos Agency">
+            <i class="fa-solid fa-earth-americas particle p1"></i>
+            <i class="fa-solid fa-rocket particle p2"></i>
+            <i class="fa-solid fa-star particle p3"></i>
+            <i class="fa-solid fa-meteor particle p4"></i>
+            <i class="fa-solid fa-satellite particle p5"></i>
+          </a>
+        </div>
 
         <div class="footer-links">
-          <a href="#inicio">Home</a>
-          <a href="#sobre">Sobre</a>
-            <a href="#formacoes">Formações</a>
-            <a href="#duvidas">Duvidas</a>
-            <a href="#servicos">Serviços</a>
-            <a href="#contato">Contato</a>
+          <a href="#inicio" data-i18n="footer-home">Home</a>
+          <a href="#sobre" data-i18n="footer-about">Sobre</a>
+          <a href="#formacoes" data-i18n="footer-education">Formações</a>
+          <a href="#duvidas" data-i18n="footer-questions">Duvidas</a>
+          <a href="#servicos" data-i18n="footer-services">Serviços</a>
+          <a href="#contato" data-i18n="footer-contact">Contato</a>
         </div>
-        
-        <a href="https://cosmusagency.vercel.app/" target="_blank" class="magic-badge" title="Criado por Cosmos Agency">
-          <img src="/img/Cosmus-Buttom-Transparent.gif" alt="Cosmos Agency">
-          <i class="fa-solid fa-earth-americas particle p1"></i>
-          <i class="fa-solid fa-rocket particle p2"></i>
-          <i class="fa-solid fa-star particle p3"></i>
-          <i class="fa-solid fa-meteor particle p4"></i>
-          <i class="fa-solid fa-satellite particle p5"></i>
-        </a>
       </div>
 
       <div class="footer-credits">

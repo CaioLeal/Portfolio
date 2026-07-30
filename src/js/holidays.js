@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ativo: true,
             anos: [2026, 2030, 2034, 2038], // Só ativa nestes anos!
             inicio: { mes: 6, dia: 1 },
-            fim: { mes: 7, dia: 31 },
+            fim: { mes: 7, dia: 19 },
             novoAvatar: "/img/caio-copa.png", 
             imagemNavbar: "/img/copa.png", 
             imagemFooter: "", 

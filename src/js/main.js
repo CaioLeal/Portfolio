@@ -4,10 +4,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initTechBubbles } from './bubbles.js';
 import './holidays.js';
 import './themes.js';
+import { initI18n } from './i18n.js';
 
 // Registra os plugins e inicia as bolhas de tecnologias
 gsap.registerPlugin(ScrollTrigger);
 initTechBubbles();
+initI18n();
 
 // ==========================================
 // 1. OCEANO & TEMA
@@ -48,8 +50,10 @@ if (langToggleBtn) {
 
 window.addEventListener('DOMContentLoaded', () => {
   const tl = gsap.timeline();
+  // Animamos a barra primeiro
   tl.from(".navbar-border-anim", { y: -100, opacity: 0, duration: 1.2, ease: "power4.out" })
-    .from([".logo-box", ".nav-links li", ".lang-btn", ".time-widget", ".btn-neon"], {
+    // E depois seus elementos internos (agora incluindo o .lang-switcher)
+    .from([".logo-box", ".nav-links li", ".lang-switcher", ".nav-actions .btn-neon"], {
       y: 20, opacity: 0, duration: 0.6, stagger: 0.05, ease: "back.out(1.5)"
     }, "-=0.8");
 });
