@@ -448,6 +448,19 @@ body {
   border-radius: 30px; /* Curvatura padrão dos cards */
   backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
+}.about-hero-bio {
+  text-align: center;
+  width: 100%;
+  max-width: 1200px; /* Aumentado para 1200px para alinhar com o resto do site */
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  z-index: 2;
+  background: var(--pill-bg);
+  padding: 40px; 
+  border-radius: 30px; 
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
 }
 
 .about-hero-bio .ss { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; }
@@ -460,7 +473,7 @@ body {
 .about-copy-content {
   text-align: center;
   width: 100%;
-  max-width: 900px; /* Padronizado com o restante do site */
+  max-width: 1200px; /* Aumentado para 1200px */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -468,8 +481,8 @@ body {
   backdrop-filter: blur(15px);
   border: 1px solid var(--accent);
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  border-radius: 30px; /* Curvatura padrão dos cards */
-  padding: 40px; /* Mais espaço interno */
+  border-radius: 30px; 
+  padding: 40px; 
   z-index: 2;
   position: relative;
 }
@@ -1481,9 +1494,10 @@ body {
   /* FOOTER - A Mágica dos Botões Lado a Lado */
   .footer-bottom {
     display: flex !important;
-    flex-direction: column !important;
-    align-items: center;
-    gap: 30px;
+    flex-direction: row !important; /* Mantém na horizontal... */
+    flex-wrap: wrap !important;     /* ...mas permite que os itens pulem de linha */
+    justify-content: center !important;
+    gap: 15px !important;
   }
   
   .footer-buttons-wrapper {
@@ -1502,7 +1516,11 @@ body {
     height: 70px !important; 
   }
 
-  .footer-links { order: 1; width: 100%; margin-bottom: 10px; }
+  .footer-links { 
+    order: 1; /* Força os links a serem o PRIMEIRO item (no topo) */
+    width: 100%; 
+    margin-bottom: 10px; 
+  }
   .footer-credits { flex-direction: column-reverse; gap: 20px; text-align: center; margin-top: 30px; }
 }
 
